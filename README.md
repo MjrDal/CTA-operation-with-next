@@ -14,6 +14,39 @@ pnpm dev
 bun dev
 ```
 
+## Prisma studio
+
+```bash
+
+npx prisma studio
+
+```
+
+## Prisma pour la db
+
+```bash
+
+npx prisma generate
+npx prisma db push
+
+```
+
+## Création du fichier .env
+
+```bash
+
+DATABASE_URL=""
+AUTH_SECRET=""
+
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.

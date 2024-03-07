@@ -1,23 +1,11 @@
-import { auth, signOut } from "@/auth";
+import { auth } from "@/auth";
 
 const SettingsPage = async () => {
   const session = await auth();
 
   session?.user.id;
 
-  return (
-    <div>
-      {JSON.stringify(session)}
-      <form
-        action={async () => {
-          "use server";
-          await signOut();
-        }}
-      >
-        <button type="submit">Sign out</button>
-      </form>
-    </div>
-  );
+  return <div>{JSON.stringify(session)} </div>;
 };
 
 export default SettingsPage;
