@@ -53,6 +53,16 @@ export const SettingGeneral = async () => {
           <Button>Motifs</Button>
         </CardContent>
       </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>User settings</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Link href="/user">
+            <Button>setting</Button>
+          </Link>
+        </CardContent>
+      </Card>
     </section>
   );
 };

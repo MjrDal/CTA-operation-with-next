@@ -35,9 +35,11 @@ const AccountPage = async () => {
         </CardContent>
         <CardFooter>
           <Button className="mr-4">Modifier</Button>
-          <Link href="/settings">
-            <Button className="mr-4">Admin</Button>
-          </Link>
+          {session?.user.role === "ADMIN" ? (
+            <Link href="/settings">
+              <Button className="mr-4">Admin</Button>
+            </Link>
+          ) : null}
           <LogOutButton />
         </CardFooter>
       </Card>
