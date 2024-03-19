@@ -47,3 +47,68 @@ model Account {
 
   @@unique([provider, providerAccountId])
 }
+
+model Groupements {
+  id String @id @default(cuid())
+  groupement String
+}
+
+model TypeVehicules {
+  id String @id @default(cuid())
+  type String?
+}
+
+model Themes {
+  id String @id @default(cuid())
+  theme String?
+  vehicule Vehicules[]
+}
+
+model Motifs {
+  id String @id @default(cuid())
+  theme String?
+  motif String?
+  moyen Moyens[]
+}
+
+model Moyens {
+  id String @id @default(cuid())
+  type Int
+  motif Motifs[]
+}
+
+model Intervention {
+  id String @id @default(cuid())
+  theme String
+  denomination String
+  dialogue String
+  radio1 String?
+  radio2 String?
+  radio3 String?
+  radio4 String?
+}
+
+model Casernes {
+  id String @id @default(cuid())
+  groupement String?
+  name String
+}
+
+model Communes {
+  id String @id @default(cuid())
+  name String?
+  code String?
+  premier String?
+  deuxieme String?
+  troisieme String?
+  quatrieme String?
+  
+}
+
+model Vehicules {
+  id String @id @default(cuid())
+  name String?
+  type String?
+  affectation String?
+  theme Themes[]
+}

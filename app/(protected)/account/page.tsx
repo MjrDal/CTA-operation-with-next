@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import LogOutButton from "@/components/auth/logout-button";
+import { UserAvatar } from "@/components/layout/Avatar";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 const AccountPage = async () => {
   const session = await auth();
@@ -20,7 +22,10 @@ const AccountPage = async () => {
       page account {JSON.stringify(session)}
       <Card>
         <CardHeader>
-          <CardTitle>Account</CardTitle>
+          <CardTitle>
+            <UserAvatar />
+            Account
+          </CardTitle>
           <CardDescription>Vos information</CardDescription>
         </CardHeader>
         <CardContent>
@@ -30,6 +35,9 @@ const AccountPage = async () => {
         </CardContent>
         <CardFooter>
           <Button className="mr-4">Modifier</Button>
+          <Link href="/settings">
+            <Button className="mr-4">Admin</Button>
+          </Link>
           <LogOutButton />
         </CardFooter>
       </Card>
