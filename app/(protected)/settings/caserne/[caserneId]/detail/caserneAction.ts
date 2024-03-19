@@ -5,7 +5,6 @@ import { CaserneSchema } from "@/schemas";
 import { z } from "zod";
 
 export const caserneAction = async (values: z.infer<typeof CaserneSchema>) => {
-  console.log(values);
   const validateFields = CaserneSchema.safeParse(values);
 
   if (!validateFields.success) {
@@ -21,5 +20,18 @@ export const caserneAction = async (values: z.infer<typeof CaserneSchema>) => {
     },
   });
 
+  return { success: "Groupement created" };
+};
+
+export const deletCaserneAction = async (values: string) => {
+  if (!values) {
+    return { error: "Invalid fields!" };
+  }
+
+  await db.casernes.delete({
+    where: {
+      id: values,
+    },
+  });
   return { success: "Groupement created" };
 };

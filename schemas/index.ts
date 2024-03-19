@@ -35,3 +35,7 @@ export const CaserneSchema = z.object({
   name: z.string().min(1, { message: "name is requered" }),
   groupement: z.string().min(1, { message: "name is requered" }),
 });
+
+export const DeleteSchema = z.object({
+  id: z.string().min(1),
+});

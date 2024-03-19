@@ -1,6 +1,8 @@
 "use client";
 
-import { caserneAction } from "@/app/(protected)/settings/caserne/[caserneId]/edit/caserneAction";
+import { caserneAction } from "@/app/(protected)/settings/caserne/[caserneId]/detail/caserneAction";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -20,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { CaserneSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -35,6 +38,7 @@ export const FormCaserneAdd: React.FC<Props> = ({ data }) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof CaserneSchema>>({
     resolver: zodResolver(CaserneSchema),
@@ -47,18 +51,18 @@ export const FormCaserneAdd: React.FC<Props> = ({ data }) => {
   function onSubmit(values: z.infer<typeof CaserneSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
     startTransition(() => {
       caserneAction(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       });
     });
+    router.push("/settings/caserne");
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 m-5">
         <FormField
           control={form.control}
           name="name"
@@ -100,7 +104,8 @@ export const FormCaserneAdd: React.FC<Props> = ({ data }) => {
             </FormItem>
           )}
         />
-
+        <FormError message={error} />
+        <FormSuccess message={success} />
         <Button type="submit">Ajouter</Button>
       </form>
     </Form>
