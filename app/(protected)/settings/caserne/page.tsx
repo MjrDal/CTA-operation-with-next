@@ -1,6 +1,7 @@
 "use server";
-import { TableCaserne } from "@/components/setting/caserne/TableCarserne";
+import { DeletButton } from "@/components/features/deleButton";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -8,6 +9,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { IoAddCircleOutline } from "react-icons/io5";
@@ -48,7 +57,34 @@ const CaserneSettingsPage: React.FC<Props> = async () => {
           </SelectContent>
         </Select>
       </div>
-      <TableCaserne data={casernes} />
+      <div>
+        <Card className="m-5">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">Id</TableHead>
+                <TableHead>Groupement</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Suppression</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {casernes.map((docs) => (
+                <TableRow key={docs.id}>
+                  <Link href={`/settings/caserne/${docs.id}`} key={docs.id}>
+                    <TableCell className="font-medium">{docs.id}</TableCell>
+                  </Link>
+                  <TableCell>{docs.groupement}</TableCell>
+                  <TableCell>{docs.name}</TableCell>
+                  <TableCell>
+                    <DeletButton caserneId={docs.id} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Card>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { PrismaClient } from "@prisma/client";
-
 interface Props {
   data: {
     id: string;

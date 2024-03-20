@@ -22,16 +22,3 @@ export const caserneAction = async (values: z.infer<typeof CaserneSchema>) => {
 
   return { success: "Groupement created" };
 };
-
-export const deletCaserneAction = async (values: string) => {
-  if (!values) {
-    return { error: "Invalid fields!" };
-  }
-
-  await db.casernes.delete({
-    where: {
-      id: values,
-    },
-  });
-  return { success: "Groupement created" };
-};
