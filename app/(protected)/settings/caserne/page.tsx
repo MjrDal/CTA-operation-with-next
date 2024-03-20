@@ -38,6 +38,9 @@ const CaserneSettingsPage: React.FC<Props> = async () => {
     <div>
       <h1 className="m-5">Casernes</h1>
       <div className=" flex flex-row m-5 gap-4">
+        <Link href="/settings">
+          <Button>Retour</Button>
+        </Link>
         <Link href="/settings/caserne/new">
           <Button>
             <IoAddCircleOutline />

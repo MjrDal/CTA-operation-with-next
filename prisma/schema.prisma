@@ -56,6 +56,7 @@ model Groupements {
 model TypeVehicules {
   id String @id @default(cuid())
   type String?
+  Vehicule Vehicules[]
 }
 
 model Themes {
@@ -108,7 +109,7 @@ model Communes {
 model Vehicules {
   id String @id @default(cuid())
   name String?
-  type String?
+  type TypeVehicules[]
   affectation String?
   theme Themes[]
 }

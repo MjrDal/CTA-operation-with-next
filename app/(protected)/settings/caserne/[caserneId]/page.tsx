@@ -27,6 +27,9 @@ const RoutePage = async (
 
   return (
     <div className=" flex flex-col h-full gap-4 m-5">
+      <Link href="/settings/caserne">
+        <Button>Retour</Button>
+      </Link>
       <Card className="h-full">
         <CardHeader className="flex flex-row justify-between items-center">
           <CardTitle className="flex flex-row items-center text-xl font-bold">
