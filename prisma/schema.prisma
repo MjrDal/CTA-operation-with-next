@@ -18,6 +18,15 @@ enum UserRole {
   USER
 }
 
+enum VehiculeStatus {
+  DISPONIBLE
+  INDISPONIBLE
+  TRAJET
+  ARRIVE
+  TRASPORT
+  HOPITAL
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -55,20 +64,20 @@ model Groupements {
 
 model TypeVehicules {
   id String @id @default(cuid())
-  type String?
+  type String
   Vehicule Vehicules[]
 }
 
 model Themes {
   id String @id @default(cuid())
-  theme String?
+  theme String
   vehicule Vehicules[]
 }
 
 model Motifs {
   id String @id @default(cuid())
-  theme String?
-  motif String?
+  theme String
+  motif String
   moyen Moyens[]
 }
 
@@ -91,25 +100,26 @@ model Intervention {
 
 model Casernes {
   id String @id @default(cuid())
-  groupement String?
+  groupement String
   name String
 }
 
 model Communes {
   id String @id @default(cuid())
-  name String?
-  code String?
-  premier String?
-  deuxieme String?
-  troisieme String?
-  quatrieme String?
+  name String
+  code String
+  premier String
+  deuxieme String
+  troisieme String
+  quatrieme String
   
 }
 
 model Vehicules {
   id String @id @default(cuid())
-  name String?
+  name String
   type TypeVehicules[]
-  affectation String?
+  affectation String
   theme Themes[]
+  status  VehiculeStatus @default(DISPONIBLE)
 }

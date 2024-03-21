@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 export type DeleteButtonProps = {
-  caserneId: string;
+  dataId: string;
 };
 
 export const DeletButton = (props: DeleteButtonProps) => {
@@ -28,7 +28,7 @@ export const DeletButton = (props: DeleteButtonProps) => {
     <Button
       variant="destructive"
       onClick={() => {
-        onSubmit(props.caserneId);
+        onSubmit(props.dataId);
       }}
     >
       <FaRegTrashAlt />

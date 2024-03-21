@@ -3,6 +3,13 @@
 pour les filtres:
 peu etre mettre les appel prisma dans une fonction et les appeller avec un onchange et audemarage de la page
 
+faire un prisma migrate
+
+```bash
+npx prisma migrate dev
+
+```
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

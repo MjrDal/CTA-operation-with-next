@@ -51,7 +51,7 @@ const RoutePage = async (
           <div className=" w-full">
             {vehicules.map((docs) => (
               <div key={docs.id}>
-                <Link href="/">
+                <Link href={`/settings/vehicule/${docs.id}`}>
                   <Card className=" bg-green-600 w-48 h-10 flex justify-center items-center">
                     {docs.name}
                   </Card>

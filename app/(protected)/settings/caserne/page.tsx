@@ -80,7 +80,7 @@ const CaserneSettingsPage: React.FC<Props> = async () => {
                   <TableCell>{docs.groupement}</TableCell>
                   <TableCell>{docs.name}</TableCell>
                   <TableCell>
-                    <DeletButton caserneId={docs.id} />
+                    <DeletButton dataId={docs.id} />
                   </TableCell>
                 </TableRow>
               ))}
