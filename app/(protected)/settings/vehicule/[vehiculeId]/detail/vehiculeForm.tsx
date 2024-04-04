@@ -1,6 +1,6 @@
 "use client";
 
-import { caserneAction } from "@/app/(protected)/settings/caserne/[caserneId]/detail/caserneAction";
+import { VehiculeSchema } from "@/app/(protected)/settings/vehicule/[vehiculeId]/detail/vehiculeSchema";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CaserneSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -30,46 +29,60 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 interface Props {
-  data: {
+  casernes: {
     id: string;
-    groupement: string;
     name: string;
+    groupement: string;
   }[];
   type: {
     id: string;
     type: string;
-  };
+  }[];
   theme: {
     id: string;
     theme: string;
-  };
+  }[];
 }
 
-export const FormVehiculeAdd: React.FC<Props> = ({ data, type, theme }) => {
+export const FormVehiculeAdd: React.FC<Props> = ({ casernes, type, theme }) => {
+  const status = [
+    "Disponible",
+    "En transit",
+    "Sur les lieux",
+    "Transport hopital",
+    "Arrivé hopital",
+    "Retour disponible",
+    "Retour indisponible",
+    "indisponible",
+  ];
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof CaserneSchema>>({
-    resolver: zodResolver(CaserneSchema),
+  const form = useForm<z.infer<typeof VehiculeSchema>>({
+    resolver: zodResolver(VehiculeSchema),
     defaultValues: {
       name: "",
+      affectation: "",
       type: "",
-      Affectation: "",
+      theme: [],
+      status: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof CaserneSchema>) {
+  function onSubmit(values: z.infer<typeof VehiculeSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    startTransition(() => {
-      caserneAction(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-      });
-    });
-    router.push("/settings/caserne");
+    console.log(values);
+
+    // startTransition(() => {
+    //   vehiculeAction(values).then((data) => {
+    //     setError(data.error);
+    //     setSuccess(data.success);
+    //   });
+    // });
+    // router.push("/settings/caserne");
   }
 
   return (
@@ -118,7 +131,7 @@ export const FormVehiculeAdd: React.FC<Props> = ({ data, type, theme }) => {
         />
         <FormField
           control={form.control}
-          name="Affectation"
+          name="affectation"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Affectation</FormLabel>
@@ -131,7 +144,7 @@ export const FormVehiculeAdd: React.FC<Props> = ({ data, type, theme }) => {
                     <SelectValue placeholder="Affectation" />
                   </SelectTrigger>
                   <SelectContent {...field}>
-                    {data.map((docs, index) => (
+                    {casernes.map((docs, index) => (
                       <SelectItem key={index} value={docs.name}>
                         {docs.name}
                       </SelectItem>
@@ -144,15 +157,76 @@ export const FormVehiculeAdd: React.FC<Props> = ({ data, type, theme }) => {
             </FormItem>
           )}
         />
-        <div className="flex items-center space-x-2">
-          <Checkbox id="terms" />
-          <label
-            htmlFor="terms"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-            Accept terms and conditions
-          </label>
-        </div>
+        <FormField
+          control={form.control}
+          name="theme"
+          render={() => (
+            <FormItem>
+              {theme.map((item) => (
+                <FormField
+                  key={item.id}
+                  control={form.control}
+                  name="theme"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={item.id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(item.theme)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.theme])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== item.theme
+                                    )
+                                  );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          {item.theme}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Status</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="type" />
+                  </SelectTrigger>
+                  <SelectContent {...field}>
+                    {status.map((docs) => (
+                      <SelectItem key={docs} value={docs}>
+                        {docs}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormError message={error} />
         <FormSuccess message={success} />
         <Button type="submit">Ajouter</Button>

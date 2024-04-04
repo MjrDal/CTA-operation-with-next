@@ -5,10 +5,18 @@ import Link from "next/link";
 import { FormVehiculeAdd } from "../[vehiculeId]/detail/vehiculeForm";
 
 interface Props {
-  data: {
+  casernes: {
     id: string;
     groupement: string;
     name: string;
+  }[];
+  type: {
+    id: string;
+    type: string;
+  }[];
+  theme: {
+    id: string;
+    theme: string;
   }[];
 }
 
@@ -24,7 +32,7 @@ const VehiculeFormPage: React.FC<Props> = async () => {
         <Button>Retour</Button>
       </Link>
       <Card className=" mt-4  p-4">
-        <FormVehiculeAdd data={casernes} type={type} theme={theme} />
+        <FormVehiculeAdd casernes={casernes} type={type} theme={theme} />
       </Card>
     </div>
   );

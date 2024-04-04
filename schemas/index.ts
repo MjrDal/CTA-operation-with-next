@@ -23,14 +23,6 @@ export const TypeVehiculeSchema = z.object({
   type: z.string().min(1, { message: "name is requered" }),
 });
 
-export const VehiculeSchema = z.object({
-  id: z.string().min(1, { message: "name is requered" }),
-  name: z.string().min(1, { message: "name is requered" }),
-  type: z.string().min(1, { message: "name is requered" }),
-  affectation: z.string().min(1, { message: "name is requered" }),
-  theme: z.string().min(1, { message: "name is requered" }),
-});
-
 export const CaserneSchema = z.object({
   name: z.string().min(1, { message: "name is requered" }),
   groupement: z.string().min(1, { message: "name is requered" }),
