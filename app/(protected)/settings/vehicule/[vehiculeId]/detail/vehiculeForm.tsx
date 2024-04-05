@@ -46,16 +46,6 @@ interface Props {
 }
 
 export const FormVehiculeAdd: React.FC<Props> = ({ casernes, type, theme }) => {
-  const status = [
-    "Disponible",
-    "En transit",
-    "Sur les lieux",
-    "Transport hopital",
-    "Arrivé hopital",
-    "Retour disponible",
-    "Retour indisponible",
-    "indisponible",
-  ];
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");

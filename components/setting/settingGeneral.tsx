@@ -49,7 +49,9 @@ export const SettingGeneral = async () => {
           <CardTitle>interventions settings</CardTitle>
         </CardHeader>
         <CardContent>
-          <Button>Interventions</Button>
+          <Link href="/settings/intervention">
+            <Button>Interventions</Button>
+          </Link>
           <Button>Motifs</Button>
         </CardContent>
       </Card>
