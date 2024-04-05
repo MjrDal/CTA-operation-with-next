@@ -32,7 +32,7 @@ const InterventionFormPage: React.FC<Props> = async () => {
         <Button>Retour</Button>
       </Link>
       <Card className=" mt-4  p-4">
-        <FormInterventionAdd casernes={casernes} type={type} theme={theme} />
+        <FormInterventionAdd />
       </Card>
     </div>
   );

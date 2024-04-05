@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
+import { BiDetail } from "react-icons/bi";
 import { IoAddCircleOutline } from "react-icons/io5";
 
 interface Props {
@@ -68,17 +69,24 @@ const InterventionSettingsPage: React.FC<Props> = async () => {
                 <TableHead className="w-[100px]">Id</TableHead>
                 <TableHead>Theme</TableHead>
                 <TableHead>Dénomination</TableHead>
+                <TableHead>detail</TableHead>
                 <TableHead>Suppression</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {interventions.map((docs) => (
                 <TableRow key={docs.id}>
-                  <Link href={`/settings/vehicule/${docs.id}`} key={docs.id}>
-                    <TableCell className="font-medium">{docs.id}</TableCell>
-                  </Link>
+                  <TableCell className="font-medium">{docs.id}</TableCell>
+
                   <TableCell>{docs.theme}</TableCell>
                   <TableCell>{docs.denomination}</TableCell>
+                  <TableCell>
+                    <Button asChild>
+                      <Link href={`/settings/intervention/${docs.id}`}>
+                        <BiDetail />
+                      </Link>
+                    </Button>
+                  </TableCell>
                   <TableCell>
                     <DeletButton dataId={docs.id} />
                   </TableCell>
