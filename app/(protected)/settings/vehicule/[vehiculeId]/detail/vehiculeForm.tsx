@@ -27,6 +27,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 
 import * as z from "zod";
+import { vehiculeAction } from "./vehiculeAction";
 
 interface Props {
   casernes: {
@@ -67,7 +68,6 @@ export const FormVehiculeAdd: React.FC<Props> = ({ casernes, type, theme }) => {
       affectation: "",
       type: "",
       theme: [],
-      status: "",
     },
   });
 
@@ -76,12 +76,12 @@ export const FormVehiculeAdd: React.FC<Props> = ({ casernes, type, theme }) => {
     // ✅ This will be type-safe and validated.
     console.log(values);
 
-    // startTransition(() => {
-    //   vehiculeAction(values).then((data) => {
-    //     setError(data.error);
-    //     setSuccess(data.success);
-    //   });
-    // });
+    startTransition(() => {
+      vehiculeAction(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
+    });
     // router.push("/settings/caserne");
   }
 
@@ -117,7 +117,7 @@ export const FormVehiculeAdd: React.FC<Props> = ({ casernes, type, theme }) => {
                   </SelectTrigger>
                   <SelectContent {...field}>
                     {type.map((docs) => (
-                      <SelectItem key={docs.id} value={docs.type}>
+                      <SelectItem key={docs.id} value={docs.id}>
                         {docs.type}
                       </SelectItem>
                     ))}
@@ -175,13 +175,13 @@ export const FormVehiculeAdd: React.FC<Props> = ({ casernes, type, theme }) => {
                       >
                         <FormControl>
                           <Checkbox
-                            checked={field.value?.includes(item.theme)}
+                            checked={field.value?.includes(item.id)}
                             onCheckedChange={(checked) => {
                               return checked
-                                ? field.onChange([...field.value, item.theme])
+                                ? field.onChange([...field.value, item.id])
                                 : field.onChange(
                                     field.value?.filter(
-                                      (value) => value !== item.theme
+                                      (value) => value !== item.id
                                     )
                                   );
                             }}
@@ -199,34 +199,7 @@ export const FormVehiculeAdd: React.FC<Props> = ({ casernes, type, theme }) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="status"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Status</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="type" />
-                  </SelectTrigger>
-                  <SelectContent {...field}>
-                    {status.map((docs) => (
-                      <SelectItem key={docs} value={docs}>
-                        {docs}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormError message={error} />
         <FormSuccess message={success} />
         <Button type="submit">Ajouter</Button>

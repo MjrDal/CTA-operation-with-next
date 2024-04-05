@@ -7,5 +7,4 @@ export const VehiculeSchema = z.object({
   theme: z.array(z.string()).refine((value) => value.some((item) => item), {
     message: "You have to select at least one item.",
   }),
-  status: z.string().min(1, { message: "status is requered" }),
 });

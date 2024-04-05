@@ -1,3 +1,5 @@
+"use server";
+
 import { VehiculeSchema } from "@/app/(protected)/settings/vehicule/[vehiculeId]/detail/vehiculeSchema";
 import { db } from "@/lib/db";
 import { z } from "zod";
@@ -11,15 +13,24 @@ export const vehiculeAction = async (
     return { error: "Invalid fields!" };
   }
 
-  const { name, type, affectation, theme, status } = validateFields.data;
+  const { name, type, affectation, theme } = validateFields.data;
+
+  const themeConnectArray = theme.map((themeId) => ({
+    id: themeId,
+  }));
 
   await db.vehicules.create({
     data: {
       name,
-      type,
+      type: {
+        connect: {
+          id: type,
+        },
+      },
       affectation,
-      theme,
-      status,
+      theme: {
+        connect: themeConnectArray,
+      },
     },
   });
 
