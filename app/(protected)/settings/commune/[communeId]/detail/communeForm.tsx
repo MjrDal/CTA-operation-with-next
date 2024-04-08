@@ -11,7 +11,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -25,6 +24,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 
 import * as z from "zod";
+import { communeUpdateAction } from "./communeAction";
 import { CommunesUpdateSchema } from "./communeSchema";
 
 interface Props {
@@ -53,10 +53,10 @@ export const FormCommuneAdd: React.FC<Props> = ({ casernes, commune }) => {
   const form = useForm<z.infer<typeof CommunesUpdateSchema>>({
     resolver: zodResolver(CommunesUpdateSchema),
     defaultValues: {
-      name: "",
+      id: commune.id,
       premier: "",
       deuxieme: "",
-      troiseme: "",
+      troisieme: "",
       quatrieme: "",
     },
   });
@@ -66,31 +66,21 @@ export const FormCommuneAdd: React.FC<Props> = ({ casernes, commune }) => {
     // ✅ This will be type-safe and validated.
     console.log(values);
 
-    // startTransition(() => {
-    //   vehiculeAction(values).then((data) => {
-    //     setError(data.error);
-    //     setSuccess(data.success);
-    //   });
-    // });
+    startTransition(() => {
+      communeUpdateAction(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
+    });
     // router.push("/settings/caserne");
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 m-5">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder={commune.name} {...field} disabled />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div>
+          <h1>{commune.name}</h1>
+        </div>
         <FormField
           control={form.control}
           name="premier"
@@ -107,7 +97,7 @@ export const FormCommuneAdd: React.FC<Props> = ({ casernes, commune }) => {
                   </SelectTrigger>
                   <SelectContent {...field}>
                     {casernes.map((docs) => (
-                      <SelectItem key={docs.id} value={docs.id}>
+                      <SelectItem key={docs.id} value={docs.name}>
                         {docs.name}
                       </SelectItem>
                     ))}
@@ -149,7 +139,7 @@ export const FormCommuneAdd: React.FC<Props> = ({ casernes, commune }) => {
         />
         <FormField
           control={form.control}
-          name="troiseme"
+          name="troisieme"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Troisième appel</FormLabel>
