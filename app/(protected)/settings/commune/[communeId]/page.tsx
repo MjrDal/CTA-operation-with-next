@@ -34,7 +34,9 @@ const RoutePage = async (
             {commune?.name}
           </CardTitle>
           <CardDescription className="flex flex-row items-center gap-4">
-            <Button>Modifier</Button>
+            <Link href={`/settings/commune/${commune?.id}/detail`}>
+              <Button>Modifier</Button>
+            </Link>
           </CardDescription>
         </CardHeader>
         <CardContent>
