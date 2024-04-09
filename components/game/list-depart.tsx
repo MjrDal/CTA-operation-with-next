@@ -7,6 +7,7 @@ interface Props {
   intervention: {
     id: string;
     theme: string;
+    denomination: string;
     dialogue: string;
     radio1: string | null;
     radio2: string | null;
@@ -51,12 +52,27 @@ export const ListDepart: React.FC<Props> = ({ intervention, commune }) => {
   function handleSubmit() {
     const newRandomInter = getRandomInt(intervention.length);
     const newRandomCommune = getRandomInt(commune.length);
-    console.log("---------------");
-    console.log(newRandomInter);
-    console.log("-----------------");
-    console.log(newRandomCommune);
     setRandomInter(newRandomInter);
     setRandomCommune(newRandomCommune);
+    const data = {
+      numero: "0001",
+      commune: commune[newRandomCommune].name,
+      code: commune[newRandomCommune].code,
+      premier: commune[newRandomCommune].premier,
+      deuxieme: commune[newRandomCommune].deuxieme,
+      troisieme: commune[newRandomCommune].troisieme,
+      quatrieme: commune[newRandomCommune].quatrieme,
+      theme: intervention[newRandomInter].theme,
+      denomination: intervention[newRandomInter].denomination,
+      dialogue: intervention[newRandomInter].dialogue,
+      radio1: intervention[newRandomInter].radio1,
+      radio2: intervention[newRandomInter].radio2,
+      radio3: intervention[newRandomInter].radio3,
+      radio4: intervention[newRandomInter].radio4,
+      note: "c'est le nord",
+      message: "un bon message",
+    };
+    console.log(data);
   }
 
   return (

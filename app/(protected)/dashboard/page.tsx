@@ -8,6 +8,7 @@ interface Props {
   intervention: {
     id: string;
     theme: string;
+    denomination: string;
     dialogue: string;
     radio1: string | null;
     radio2: string | null;
