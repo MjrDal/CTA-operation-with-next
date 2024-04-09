@@ -121,5 +121,34 @@ model Vehicules {
   type TypeVehicules[]
   affectation String
   theme Themes[]
+  inter Generation[]
   status  VehiculeStatus @default(DISPONIBLE)
+}
+
+model Generation {
+  id String @id @default(cuid())
+  numero String
+  commune String
+  code String
+  premier String
+  deuxieme String
+  troisieme String
+  quatrieme String
+  theme String
+  denomination String
+  dialogue String
+  radio1 String?
+  radio2 String?
+  radio3 String?
+  radio4 String?
+  note String
+  vehicules Vehicules[]
+  messages Message[]
+  
+}
+
+model Message {
+  id String @id @default(cuid())
+  message String
+  generation Generation[]
 }
