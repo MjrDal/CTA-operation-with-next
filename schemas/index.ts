@@ -40,3 +40,21 @@ export const CommuneSchema = z.object({
 export const DeleteSchema = z.object({
   id: z.string().min(1),
 });
+
+export const GenerationSchema = z.object({
+  numero: z.string().min(1, { message: "name is requered" }),
+  commune: z.string().min(1, { message: "name is requered" }),
+  code: z.string().min(1, { message: "name is requered" }),
+  premier: z.string().min(1, { message: "name is requered" }),
+  deuxieme: z.string().min(1, { message: "name is requered" }),
+  troisieme: z.string().min(1, { message: "name is requered" }),
+  quatrieme: z.string().min(1, { message: "name is requered" }),
+  theme: z.string().min(1, { message: "name is requered" }),
+  denomination: z.string().min(1, { message: "name is requered" }),
+  dialogue: z.string().min(1, { message: "name is requered" }),
+  radio1: z.string().min(1, { message: "name is requered" }),
+  radio2: z.string().optional(),
+  radio3: z.string().optional(),
+  radio4: z.string().optional(),
+  note: z.string().min(1, { message: "name is requered" }),
+});

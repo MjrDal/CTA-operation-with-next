@@ -1,7 +1,8 @@
 "use server";
 
 import { auth } from "@/auth";
-import { ListDepart } from "@/components/game/list-depart";
+import { GenerationInter } from "@/components/game/generation-inter";
+import ListInter from "@/components/game/list-inter";
 import { PrismaClient } from "@prisma/client";
 
 interface Props {
@@ -37,7 +38,8 @@ const DashboardPage: React.FC<Props> = async () => {
   return (
     <div>
       {JSON.stringify(session)}
-      <ListDepart intervention={intervention} commune={commune} />
+      <GenerationInter intervention={intervention} commune={commune} />
+      <ListInter />
     </div>
   );
 };
