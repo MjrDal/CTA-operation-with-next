@@ -1,9 +1,8 @@
 "use server";
 
-import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { PrismaClient } from "@prisma/client";
+import { CardInter } from "./card_inter";
 
 interface Props {}
 
@@ -22,22 +21,13 @@ const ListInter: React.FC<Props> = async () => {
           </h4>
           {generation.map((doc) => (
             <div key={doc.id}>
-              <Card>
-                <div className=" flex flex-row h-5 items-center space-x-4 text-sm">
-                  <div>{doc.numero}</div>
-                  <Separator orientation="vertical" />
-                  <div>{doc.denomination}</div>
-                  <Separator orientation="vertical" />
-                  <div>
-                    {doc.commune} {doc.code}
-                  </div>
-                </div>
-                <Separator className="" />
-                <div>
-                  <h5>Vehicules en intervention</h5>
-                  <div>{doc.vehicules[0].name}</div>
-                </div>
-              </Card>
+              <CardInter
+                numero={doc.numero}
+                denomination={doc.denomination}
+                commune={doc.commune}
+                code={doc.code}
+                vehicules={doc.vehicules}
+              />
             </div>
           ))}
         </div>
