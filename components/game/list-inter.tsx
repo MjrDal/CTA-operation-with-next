@@ -9,7 +9,7 @@ interface Props {}
 const ListInter: React.FC<Props> = async () => {
   const prisma = new PrismaClient();
   const generation = await prisma.generation.findMany({
-    include: { vehicules: true },
+    include: { vehicules: true, messages: true },
   });
 
   return (
@@ -22,11 +22,15 @@ const ListInter: React.FC<Props> = async () => {
           {generation.map((doc) => (
             <div key={doc.id}>
               <CardInter
+                id={doc.id}
                 numero={doc.numero}
                 denomination={doc.denomination}
                 commune={doc.commune}
                 code={doc.code}
                 vehicules={doc.vehicules}
+                note={doc.note}
+                messages={doc.messages}
+                generation={doc.messages}
               />
             </div>
           ))}

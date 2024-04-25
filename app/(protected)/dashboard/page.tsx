@@ -38,7 +38,9 @@ const DashboardPage: React.FC<Props> = async () => {
   return (
     <div>
       {JSON.stringify(session)}
-      <GenerationInter intervention={intervention} commune={commune} />
+      {session?.user.role === "ADMIN" ? (
+        <GenerationInter intervention={intervention} commune={commune} />
+      ) : null}
       <ListInter />
     </div>
   );

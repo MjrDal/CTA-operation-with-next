@@ -58,3 +58,12 @@ export const GenerationSchema = z.object({
   radio4: z.string().optional(),
   note: z.string().min(1, { message: "name is requered" }),
 });
+
+export const MessageSchema = z.object({
+  message: z.string().min(1, { message: "name is requered" }),
+  generation: z
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "You have to select at least one item.",
+    }),
+});
