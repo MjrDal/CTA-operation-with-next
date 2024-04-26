@@ -21,17 +21,7 @@ const ListInter: React.FC<Props> = async () => {
           </h4>
           {generation.map((doc) => (
             <div key={doc.id}>
-              <CardInter
-                id={doc.id}
-                numero={doc.numero}
-                denomination={doc.denomination}
-                commune={doc.commune}
-                code={doc.code}
-                vehicules={doc.vehicules}
-                note={doc.note}
-                messages={doc.messages}
-                generation={doc.messages}
-              />
+              <CardInter id={doc.id} />
             </div>
           ))}
         </div>
