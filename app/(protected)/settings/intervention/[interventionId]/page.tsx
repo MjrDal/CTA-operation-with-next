@@ -1,3 +1,5 @@
+import { DeletAudioButton } from "@/components/features/deleAudioButton";
+import AudioPlayer from "@/components/game/audioPlayer";
 import { PageParams } from "@/components/types/next";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +13,7 @@ import {
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
-import { FaGripfire, FaRegTrashAlt } from "react-icons/fa";
+import { FaGripfire } from "react-icons/fa";
 
 const RoutePage = async (
   props: PageParams<{
@@ -51,23 +53,29 @@ const RoutePage = async (
                   Message radio numéro 1
                 </TableCell>
                 <TableCell>
-                  <Button asChild>
-                    <Link
-                      href={{
-                        pathname: `/settings/audio/${props.params.interventionId}`,
-                        query: { extraParam: "radio1" },
-                      }}
-                    >
-                      Enregistrer un message
-                    </Link>
-                  </Button>
+                  {!intervention?.radio1 ? (
+                    <Button asChild>
+                      <Link
+                        href={{
+                          pathname: `/settings/audio/${props.params.interventionId}`,
+                          query: { extraParam: "radio1" },
+                        }}
+                      >
+                        Enregistrer un message
+                      </Link>
+                    </Button>
+                  ) : (
+                    <AudioPlayer audioName={intervention.radio1} />
+                  )}
                 </TableCell>
                 {intervention?.radio1 ? (
                   <TableCell>
                     {intervention?.radio1}
-                    <Button className="mx-2" variant="destructive">
-                      <FaRegTrashAlt />
-                    </Button>
+                    <DeletAudioButton
+                      dataId={props.params.interventionId}
+                      radio={"radio1"}
+                      audioName={intervention.radio1}
+                    />
                   </TableCell>
                 ) : (
                   <TableCell>Aucun fichier</TableCell>
@@ -92,9 +100,11 @@ const RoutePage = async (
                 {intervention?.radio2 ? (
                   <TableCell>
                     {intervention?.radio2}
-                    <Button className="mx-2" variant="destructive">
-                      <FaRegTrashAlt />
-                    </Button>
+                    <DeletAudioButton
+                      dataId={props.params.interventionId}
+                      radio={"radio2"}
+                      audioName={intervention.radio2}
+                    />
                   </TableCell>
                 ) : (
                   <TableCell>Aucun fichier</TableCell>
@@ -119,9 +129,11 @@ const RoutePage = async (
                 {intervention?.radio3 ? (
                   <TableCell>
                     {intervention?.radio3}
-                    <Button className="mx-2" variant="destructive">
-                      <FaRegTrashAlt />
-                    </Button>
+                    <DeletAudioButton
+                      dataId={props.params.interventionId}
+                      radio={"radio3"}
+                      audioName={intervention.radio3}
+                    />
                   </TableCell>
                 ) : (
                   <TableCell>Aucun fichier</TableCell>
@@ -146,9 +158,11 @@ const RoutePage = async (
                 {intervention?.radio4 ? (
                   <TableCell>
                     {intervention?.radio4}
-                    <Button className="mx-2" variant="destructive">
-                      <FaRegTrashAlt />
-                    </Button>
+                    <DeletAudioButton
+                      dataId={props.params.interventionId}
+                      radio={"radio4"}
+                      audioName={intervention.radio4}
+                    />
                   </TableCell>
                 ) : (
                   <TableCell>Aucun fichier</TableCell>
