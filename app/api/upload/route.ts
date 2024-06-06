@@ -1,5 +1,4 @@
 import { mkdir, stat, writeFile } from "fs/promises";
-import mime from "mime";
 import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
 
@@ -40,7 +39,7 @@ export async function POST(req: NextRequest) {
     const filename = `${(file as File).name.replace(
       /\.[^/.]+$/,
       ""
-    )}-${uniqueSuffix}.${mime.getExtension(file.type)}`;
+    )}-${uniqueSuffix}.mp3`;
     await writeFile(`${uploadDir}/${filename}`, buffer);
     return NextResponse.json({ fileUrl: `${relativeUploadDir}/${filename}` });
   } catch (e) {

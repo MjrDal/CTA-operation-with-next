@@ -23,27 +23,27 @@ export default function RecAudio() {
     audio.src = url;
     audio.controls = true;
     document.body.appendChild(audio);
-
-    const formDataAudio = new FormData();
-    formDataAudio.append("audio", blob);
-    console.log(formDataAudio);
     setBlob(blob);
-
-    // try {
-    //   const res = await fetch("/api/upload", {
-    //     method: "POST",
-    //     body: formDataAudio,
-    //   });
-
-    //   if (!res.ok) {
-    //     console.error("something went wrong. no responce");
-    //     return;
-    //   }
-    // } catch (error) {
-    //   console.error("something went wrong");
-    // }
   };
 
+  async function upload(blob: Blob) {
+    const formDataAudio = new FormData();
+    formDataAudio.append("audio", blob);
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formDataAudio,
+      });
+
+      if (!res.ok) {
+        console.error("something went wrong. no responce");
+        return;
+      }
+    } catch (error) {
+      console.error("something went wrong");
+    }
+    window.location.reload();
+  }
   return (
     <div>
       {!blob ? (
@@ -57,7 +57,15 @@ export default function RecAudio() {
           </button>
         </div>
       ) : null}
-      {blob ? <Button>Téléchargement</Button> : null}
+      {blob ? (
+        <Button
+          onClick={() => {
+            upload(blob);
+          }}
+        >
+          Téléchargement
+        </Button>
+      ) : null}
       {blob ? (
         <Button onClick={() => window.location.reload()}>Recommencez</Button>
       ) : null}
