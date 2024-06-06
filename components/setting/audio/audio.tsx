@@ -1,10 +1,18 @@
 "use client";
 
+import { uploadAction } from "@/actions/upload";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
-export default function RecAudio() {
+interface Props {
+  id: string;
+  radio: string | null;
+}
+
+export default function RecAudio({ id, radio }: Props) {
+  const interventionId = id;
+  const interventionRadio = radio;
   const [blob, setBlob] = useState<Blob | null>(null);
   const {
     startRecording,
@@ -29,19 +37,20 @@ export default function RecAudio() {
   async function upload(blob: Blob) {
     const formDataAudio = new FormData();
     formDataAudio.append("audio", blob);
-    try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formDataAudio,
-      });
+    uploadAction(formDataAudio, id, radio);
+    // try {
+    //   const res = await fetch("/api/upload", {
+    //     method: "POST",
+    //     body: formDataAudio,
+    //   });
 
-      if (!res.ok) {
-        console.error("something went wrong. no responce");
-        return;
-      }
-    } catch (error) {
-      console.error("something went wrong");
-    }
+    //   if (!res.ok) {
+    //     console.error("something went wrong. no responce");
+    //     return;
+    //   }
+    // } catch (error) {
+    //   console.error("something went wrong");
+    // }
     window.location.reload();
   }
   return (

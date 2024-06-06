@@ -11,7 +11,7 @@ import {
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
-import { FaGripfire } from "react-icons/fa";
+import { FaGripfire, FaRegTrashAlt } from "react-icons/fa";
 
 const RoutePage = async (
   props: PageParams<{
@@ -62,30 +62,97 @@ const RoutePage = async (
                     </Link>
                   </Button>
                 </TableCell>
+                {intervention?.radio1 ? (
+                  <TableCell>
+                    {intervention?.radio1}
+                    <Button className="mx-2" variant="destructive">
+                      <FaRegTrashAlt />
+                    </Button>
+                  </TableCell>
+                ) : (
+                  <TableCell>Aucun fichier</TableCell>
+                )}
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium">
                   Message radio numéro 2
                 </TableCell>
                 <TableCell>
-                  <Button>Enregistrer un message</Button>
+                  <Button asChild>
+                    <Link
+                      href={{
+                        pathname: `/settings/audio/${props.params.interventionId}`,
+                        query: { extraParam: "radio2" },
+                      }}
+                    >
+                      Enregistrer un message
+                    </Link>
+                  </Button>
                 </TableCell>
+                {intervention?.radio2 ? (
+                  <TableCell>
+                    {intervention?.radio2}
+                    <Button className="mx-2" variant="destructive">
+                      <FaRegTrashAlt />
+                    </Button>
+                  </TableCell>
+                ) : (
+                  <TableCell>Aucun fichier</TableCell>
+                )}
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium">
                   Message radio numéro 3
                 </TableCell>
                 <TableCell>
-                  <Button>Enregistrer un message</Button>
+                  <Button asChild>
+                    <Link
+                      href={{
+                        pathname: `/settings/audio/${props.params.interventionId}`,
+                        query: { extraParam: "radio3" },
+                      }}
+                    >
+                      Enregistrer un message
+                    </Link>
+                  </Button>
                 </TableCell>
+                {intervention?.radio3 ? (
+                  <TableCell>
+                    {intervention?.radio3}
+                    <Button className="mx-2" variant="destructive">
+                      <FaRegTrashAlt />
+                    </Button>
+                  </TableCell>
+                ) : (
+                  <TableCell>Aucun fichier</TableCell>
+                )}
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium">
                   Message radio numéro 4
                 </TableCell>
                 <TableCell>
-                  <Button>Enregistrer un message</Button>
+                  <Button asChild>
+                    <Link
+                      href={{
+                        pathname: `/settings/audio/${props.params.interventionId}`,
+                        query: { extraParam: "radio4" },
+                      }}
+                    >
+                      Enregistrer un message
+                    </Link>
+                  </Button>
                 </TableCell>
+                {intervention?.radio4 ? (
+                  <TableCell>
+                    {intervention?.radio4}
+                    <Button className="mx-2" variant="destructive">
+                      <FaRegTrashAlt />
+                    </Button>
+                  </TableCell>
+                ) : (
+                  <TableCell>Aucun fichier</TableCell>
+                )}
               </TableRow>
             </TableBody>
           </Table>
