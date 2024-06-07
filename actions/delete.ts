@@ -2,15 +2,28 @@
 
 import { db } from "@/lib/db";
 
-export const deletAction = async (values: string) => {
+export const deletAction = async (values: string, data: string) => {
   if (!values) {
     return { error: "Invalid fields!" };
   }
 
-  await db.casernes.delete({
-    where: {
-      id: values,
-    },
-  });
-  return { success: "Groupement created" };
+  if (data === "intervention") {
+    await db.intervention.delete({
+      where: {
+        id: values,
+      },
+    });
+    return { success: "Groupement deleted" };
+  }
+
+  if (data === "casernes") {
+    await db.casernes.delete({
+      where: {
+        id: values,
+      },
+    });
+    return { success: "Groupement deleted" };
+  }
+
+  return { success: " delete complite" };
 };

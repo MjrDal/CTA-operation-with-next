@@ -7,6 +7,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 export type DeleteButtonProps = {
   dataId: string;
+  data: string;
 };
 
 export const DeletButton = (props: DeleteButtonProps) => {
@@ -15,7 +16,7 @@ export const DeletButton = (props: DeleteButtonProps) => {
 
   function onSubmit(values: string) {
     console.log(values);
-    deletAction(values).then((data) => {
+    deletAction(props.dataId, props.data).then((data) => {
       setError(data.error);
       setSuccess(data.success);
       if (data.success) {

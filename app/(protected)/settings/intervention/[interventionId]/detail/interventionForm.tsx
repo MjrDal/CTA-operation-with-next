@@ -36,10 +36,6 @@ export const FormInterventionAdd: React.FC<Props> = () => {
       theme: "",
       denomination: "",
       dialogue: "",
-      radio1: "",
-      radio2: "",
-      radio3: "",
-      radio4: "",
     },
   });
 
@@ -95,74 +91,6 @@ export const FormInterventionAdd: React.FC<Props> = () => {
               <FormControl>
                 <Textarea
                   placeholder="dialogue"
-                  className="resize-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="radio1"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message radio 1</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="message"
-                  className="resize-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="radio2"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message radio 2</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="message"
-                  className="resize-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="radio3"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message radio 3</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="message"
-                  className="resize-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="radio4"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message radio 4</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="message"
                   className="resize-none"
                   {...field}
                 />
