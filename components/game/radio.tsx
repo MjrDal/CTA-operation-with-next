@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import ModaleLecteur from "./modale_lecteur";
+import AudioPlayer from "./audioPlayer";
 import { ModaleMessages } from "./modale_message";
 
 interface Props {
@@ -60,7 +60,7 @@ export const Radio: React.FC<Props> = ({ generation }) => {
             </DialogDescription>
           </DialogHeader>
           <div>
-            <ModaleLecteur />
+            <AudioPlayer audioName={generation[randomGeneration].radio1} />
           </div>
           <div className="grid gap-4 py-4">
             <ModaleMessages
