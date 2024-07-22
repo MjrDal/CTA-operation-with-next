@@ -13,12 +13,14 @@ export const Header = async () => {
   return (
     <header className="p-5 w-full flex flex-row justify-between bg-slate-400">
       <div>
-        <Image
-          src="/images/logo.png"
-          width={50}
-          height={35}
-          alt="logo du site"
-        />
+        <Link href="/dashboard">
+          <Image
+            src="/images/logo.png"
+            width={50}
+            height={35}
+            alt="logo du site"
+          />
+        </Link>
       </div>
       <nav className="flex flex-row items-center">
         <div className="mr-2">Opérateur: {session?.user.name}</div>
