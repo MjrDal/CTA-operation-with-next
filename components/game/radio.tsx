@@ -52,21 +52,23 @@ export const Radio: React.FC<Props> = ({ generation }) => {
         <DialogTrigger asChild>
           <Button onClick={handleSubmit}>Génerer un message radio</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className=" w-[900px]">
           <DialogHeader>
             <DialogTitle>Radio</DialogTitle>
             <DialogDescription>
               Intervention numéro: {generation[randomGeneration].id}
             </DialogDescription>
           </DialogHeader>
-          <div>
-            <AudioPlayer audioName={generation[randomGeneration].radio1} />
-          </div>
-          <div className="grid gap-4 py-4">
-            <ModaleMessages
-              id={generation[randomGeneration].id}
-              messages={generation[randomGeneration].messages}
-            />
+          <div className=" flex flex-row px-10 justify-between gap-10">
+            <div>
+              <AudioPlayer audioName={generation[randomGeneration].radio1} />
+            </div>
+            <div className="grid gap-4 py-4">
+              <ModaleMessages
+                id={generation[randomGeneration].id}
+                messages={generation[randomGeneration].messages}
+              />
+            </div>
           </div>
         </DialogContent>
       </Dialog>

@@ -46,6 +46,12 @@ const RoutePage = async (
           <p className=" mb-4">{commune?.name}</p>
           <h2 className=" mb-2">Code postal :</h2>
           <p className=" mb-4">{commune?.code}</p>
+          <h2 className=" mb-2">Code insee :</h2>
+          <p className=" mb-4">{commune?.insee}</p>
+          <h2 className=" mb-2">Longitude :</h2>
+          <p className=" mb-4">{commune?.long}</p>
+          <h2 className=" mb-2">Latitude :</h2>
+          <p className=" mb-4">{commune?.lat}</p>
         </CardContent>
         <CardFooter className=" flex flex-col gap-4">
           <h2 className=" mb-2">Premier appel :</h2>

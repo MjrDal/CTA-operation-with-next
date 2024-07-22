@@ -37,7 +37,9 @@ const RoutePage = async (
             Casernes de {caserne?.name}
           </CardTitle>
           <CardDescription className="flex flex-row items-center gap-4">
-            <Button>Modifier</Button>
+            <Link href={`/settings/caserne/${caserne?.id}/detail`}>
+              <Button>Modifier</Button>
+            </Link>
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -45,6 +47,10 @@ const RoutePage = async (
           <p className=" mb-4">{caserne?.id}</p>
           <h2 className=" mb-2">Groupement :</h2>
           <p className=" mb-4">{caserne?.groupement}</p>
+          <h2 className=" mb-2">Longitude :</h2>
+          <p className=" mb-4">{caserne?.long}</p>
+          <h2 className=" mb-2">Latitude :</h2>
+          <p className=" mb-4">{caserne?.lat}</p>
         </CardContent>
         <CardFooter className=" flex flex-col gap-4">
           <h2 className="flex flex-row items-center">Vehicules :</h2>

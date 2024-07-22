@@ -102,17 +102,25 @@ model Casernes {
   id String @id @default(cuid())
   groupement String
   name String
+  long String?
+  lat  String?
 }
 
 model Communes {
   id String @id @default(cuid())
   name String
   code String
+  insee String?
+  long String?
+  lat  String?
   premier String
   deuxieme String
   troisieme String
   quatrieme String
-  
+  cinqieme String?
+  sixieme String?
+  septieme String?
+  huitieme String?
 }
 
 model Vehicules {

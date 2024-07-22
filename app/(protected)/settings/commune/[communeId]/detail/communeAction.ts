@@ -1,9 +1,8 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { CommuneSchema } from "@/schemas";
 import { z } from "zod";
-import { CommunesUpdateSchema } from "./communeSchema";
+import { CommuneSchema, CommunesUpdateSchema } from "./communeSchema";
 
 export const communeAction = async (values: z.infer<typeof CommuneSchema>) => {
   const validateFields = CommuneSchema.safeParse(values);
@@ -12,17 +11,37 @@ export const communeAction = async (values: z.infer<typeof CommuneSchema>) => {
     return { error: "Invalid fields!" };
   }
 
-  const { name, code, premier, deuxieme, troisieme, quatrieme } =
-    validateFields.data;
+  const {
+    name,
+    code,
+    insee,
+    long,
+    lat,
+    premier,
+    deuxieme,
+    troisieme,
+    quatrieme,
+    cinqieme,
+    sixieme,
+    septieme,
+    huitieme,
+  } = validateFields.data;
 
   await db.communes.create({
     data: {
       name,
       code,
+      insee,
+      long,
+      lat,
       premier,
       deuxieme,
       troisieme,
       quatrieme,
+      cinqieme,
+      sixieme,
+      septieme,
+      huitieme,
     },
   });
 
@@ -50,5 +69,11 @@ export const communeUpdateAction = async (
     },
   });
 
-  return { success: "Groupement created" };
+  return { success: "caserne ajouter" };
+};
+
+export const communeDeleteAction = async () => {
+  await db.communes.deleteMany({});
+
+  return { success: "caserne ajouter" };
 };
