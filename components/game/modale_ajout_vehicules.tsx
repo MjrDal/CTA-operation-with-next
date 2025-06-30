@@ -29,7 +29,8 @@ export const ModaleAjoutVehicules: React.FC<Props> = ({
   quatrieme,
 }) => {
   return (
-    <div>
+    <div className="w-60">
+      <h2>Ajouter des vehicules à l&apos;intervention :</h2>
       <ScrollArea className="h-72 rounded-md border">
         <div>
           <Card>

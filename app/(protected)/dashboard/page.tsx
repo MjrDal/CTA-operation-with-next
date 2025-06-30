@@ -3,11 +3,16 @@
 import { auth } from "@/auth";
 import Communication from "@/components/game/communication";
 import ListInter from "@/components/game/list-inter";
+import dynamic from "next/dynamic";
 
 interface Props {}
 
 const DashboardPage: React.FC<Props> = async () => {
   const session = await auth();
+
+  const MapComponent = dynamic(() => import("@/components/map/MapComponent"), {
+    ssr: false, // This line is important to prevent SSR issues
+  });
 
   session?.user.id;
 
@@ -15,7 +20,10 @@ const DashboardPage: React.FC<Props> = async () => {
     <div className=" flex flex-row justify-center pt-8 gap-4">
       {/* {JSON.stringify(session)} */}
       <Communication />
-      <ListInter />
+      <div className="flex flex-col">
+        <ListInter />
+        <MapComponent />
+      </div>
     </div>
   );
 };

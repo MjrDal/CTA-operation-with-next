@@ -3,6 +3,7 @@
 import { generationAction } from "@/actions/generation";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState, useTransition } from "react";
+import { BsFillTelephoneOutboundFill } from "react-icons/bs";
 
 interface Props {
   intervention: {
@@ -87,7 +88,12 @@ export const GenerationInter: React.FC<Props> = ({ intervention, commune }) => {
   return (
     <div>
       <div>
-        <Button onClick={handleSubmit}>Génerer une intervention</Button>
+        <Button
+          className=" w-full h-10 border-2 border-black rounded-sm flex justify-center items-center bg-red-600"
+          onClick={handleSubmit}
+        >
+          <BsFillTelephoneOutboundFill />
+        </Button>
       </div>
     </div>
   );

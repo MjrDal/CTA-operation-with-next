@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
+import { FaWalkieTalkie } from "react-icons/fa6";
 import AudioPlayer from "./audioPlayer";
 import { ModaleMessages } from "./modale_message";
 
@@ -50,7 +51,12 @@ export const Radio: React.FC<Props> = ({ generation }) => {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button onClick={handleSubmit}>Génerer un message radio</Button>
+          <Button
+            className="w-full h-10 border-2 border-black rounded-sm flex justify-center items-center bg-red-600"
+            onClick={handleSubmit}
+          >
+            <FaWalkieTalkie />
+          </Button>
         </DialogTrigger>
         <DialogContent className=" w-[900px]">
           <DialogHeader>

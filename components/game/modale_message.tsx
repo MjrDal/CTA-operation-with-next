@@ -40,7 +40,6 @@ export const ModaleMessages: React.FC<Props> = ({ id, messages }) => {
   function onSubmit(values: z.infer<typeof MessageSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
 
     startTransition(() => {
       messageAction(values).then((data) => {
@@ -50,11 +49,14 @@ export const ModaleMessages: React.FC<Props> = ({ id, messages }) => {
     });
     // router.push("/settings/caserne");
   }
+
   return (
-    <div>
+    <div className="w-full">
       <div>
-        <div>
-          <h2>Messages:</h2>
+        <h2>Messages:</h2>
+        {messages.length == 0 ? (
+          <p>pas de messages à affiché</p>
+        ) : (
           <ScrollArea>
             {messages.map((message) => (
               <div key={message.id}>
@@ -63,31 +65,31 @@ export const ModaleMessages: React.FC<Props> = ({ id, messages }) => {
               </div>
             ))}
           </ScrollArea>
-        </div>
-        <div>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Textarea
-                        placeholder="message"
-                        className="resize-none"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+        )}
+      </div>
+      <div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Textarea
+                      placeholder="message"
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <Button type="submit">Ajouter un message</Button>
-            </form>
-          </Form>
-        </div>
+            <Button type="submit">Ajouter un message</Button>
+          </form>
+        </Form>
       </div>
     </div>
   );

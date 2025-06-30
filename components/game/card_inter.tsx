@@ -10,6 +10,7 @@ import { TbClockHour10, TbFiretruck } from "react-icons/tb";
 import { ModaleAjoutVehicules } from "./modale_ajout_vehicules";
 import { ModaleDescription } from "./modale_description";
 import { ModaleMessages } from "./modale_message";
+import { ModaleVehicules } from "./modale_vehicules";
 
 interface Props {
   id: string;
@@ -33,6 +34,18 @@ export const CardInter: React.FC<Props> = async ({ id }) => {
   const quatriemeAppel = await prisma?.vehicules.findMany({
     where: { affectation: intervention[0].quatrieme },
   });
+  // const cinquiemeAppel = await prisma?.vehicules.findMany({
+  //   where: { affectation: intervention[0].cinqieme },
+  // });
+  // const sixiemeAppel = await prisma?.vehicules.findMany({
+  //   where: { affectation: intervention[0].sixieme },
+  // });
+  // const septiemeAppel = await prisma?.vehicules.findMany({
+  //   where: { affectation: intervention[0].septieme },
+  // });
+  // const huitiemeAppel = await prisma?.vehicules.findMany({
+  //   where: { affectation: intervention[0].huitieme },
+  // });
   return (
     <div>
       <Dialog>
@@ -60,35 +73,43 @@ export const CardInter: React.FC<Props> = async ({ id }) => {
             </div>
             <Separator className="" />
             <div>
-              <div className=" flex flex-row items-center gap-3">
+              <div className=" flex flex-row items-center gap-3 p-2">
                 <TbFiretruck />
                 <h5>Vehicules en intervention :</h5>
               </div>
               <div>
                 {intervention[0].vehicules.map((doc) => (
-                  <div
-                    className=" bg-red-600 w-32 flex justify-center rounded-sm text-white"
-                    key={doc.id}
-                  >
-                    {doc.name}
+                  <div key={doc.id} className="flex flex-row p-2">
+                    <h3>{doc.name.split(" ")[1]}:</h3>
+                    <p className=" bg-red-600 w-24 mx-2 flex justify-center rounded-sm text-white">
+                      {doc.name.split(" ")[0]}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
           </Card>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <ModaleDescription
-            numero={intervention[0].numero}
-            commune={intervention[0].commune}
-            code={intervention[0].code}
-            vehicules={intervention[0].vehicules}
-            note={intervention[0].note}
-          />
-          <ModaleMessages
-            id={intervention[0].id}
-            messages={intervention[0].messages}
-          />
+        <DialogContent className="w-full">
+          <div className="flex flex-row w-full justify-center gap-10">
+            <ModaleDescription
+              numero={intervention[0].numero}
+              commune={intervention[0].commune}
+              code={intervention[0].code}
+              note={intervention[0].note}
+            />
+            <ModaleVehicules
+              numero={intervention[0].numero}
+              commune={intervention[0].commune}
+              code={intervention[0].code}
+              vehicules={intervention[0].vehicules}
+              note={intervention[0].note}
+            />
+            <ModaleMessages
+              id={intervention[0].id}
+              messages={intervention[0].messages}
+            />
+          </div>
           <ModaleAjoutVehicules
             premier={premierAppel}
             deuxieme={deuxiemerAppel}
